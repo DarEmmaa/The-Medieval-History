@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 
 public class LoginUIVillage : MonoBehaviour
 {
@@ -10,13 +11,15 @@ public class LoginUIVillage : MonoBehaviour
 
 
     [SerializeField] private Transform mainCameraTransform;
-    [SerializeField] private Transform medeivalCityCenter;
+    [SerializeField] private Transform medeivalVillageCenter;
+    
 
     [SerializeField] private decimal networth;
-    [SerializeField] private decimal minNetworth = 1M;
     [SerializeField] private decimal maxNetworth = 4.5M;
 
     [SerializeField] private TMP_Text outputText;
+
+  
 
 
 
@@ -30,10 +33,11 @@ public class LoginUIVillage : MonoBehaviour
     {
         networth = decimal.Parse(networthInputfield.text);
 
-        if (networth >= maxNetworth)
+        if (networth > maxNetworth)
         {
             outputText.text = "Welcome to the Medieval Village";
-            mainCameraTransform.position = medeivalCityCenter.position;
+            mainCameraTransform.transform.DOMove(medeivalVillageCenter.position, 5);//.onComplete(RotateCamera);
+            mainCameraTransform.transform.DORotate(new Vector3(0.0f, -44.698f, 0.0f), 10.0f, RotateMode.Fast);
         }
         else
         {
@@ -42,4 +46,7 @@ public class LoginUIVillage : MonoBehaviour
         }
 
     }
+
+   
+
 }

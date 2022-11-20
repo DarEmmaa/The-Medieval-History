@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
 
 public class LoginUI : MonoBehaviour
 {
@@ -12,7 +13,9 @@ public class LoginUI : MonoBehaviour
 
 
     [SerializeField] private Transform mainCameraTransform;
-    [SerializeField] private Transform medeivalVillageCenter;
+    [SerializeField] private Transform medeivalCityCenter;
+    [SerializeField] private Transform startMenuPosition;
+   
 
     [SerializeField] private decimal networth;
     [SerializeField] private decimal minNetworth = 1M;
@@ -35,7 +38,8 @@ public class LoginUI : MonoBehaviour
         if(networth >= minNetworth && networth <= maxNetworth)
         {
             outputText.text = "Welcome to the Medieval Village";
-            mainCameraTransform.position = medeivalVillageCenter.position;
+            mainCameraTransform.transform.DOMove(medeivalCityCenter.position, 5);//.onComplete(RotateCamera);
+            mainCameraTransform.transform.DORotate(new Vector3(0.0f, -44.698f, 0.0f),10.0f, RotateMode.Fast)  ;
         }
         else
         {
@@ -43,6 +47,17 @@ public class LoginUI : MonoBehaviour
             outputText.text = "Sorry! Come back next time when you are eligible";
         }
         
+    }
+
+    /*public void RotateCamera()
+    {
+        mainCameraTransform.transform.DORotate(new Vector3(0.0f, -44.698f, 0.0f),2.0f, RotateMode.Fast)  ;
+    }*/
+
+    public void ReturnToMenu()
+    {
+        mainCameraTransform.transform.DOMove(startMenuPosition.position, 2);//.onComplete(RotateCamera);
+        mainCameraTransform.transform.DORotate(new Vector3(0.0f, -94.785f, 0.0f), 5.0f, RotateMode.Fast);
     }
 
 
