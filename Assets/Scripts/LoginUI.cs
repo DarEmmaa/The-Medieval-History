@@ -44,7 +44,8 @@ public class LoginUI : MonoBehaviour
         else
         {
             outputText.color = Color.white;
-            outputText.text = "Sorry! Come back next time when you are eligible";
+            outputText.text = "Sorry! Come back next time when you are eligible..." +
+                "'Networth must be within 1 and 4.5'";
         }
         
     }
